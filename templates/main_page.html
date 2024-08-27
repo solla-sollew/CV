@@ -28,12 +28,14 @@
                 {{ comment.content }}
                 </div>
             {% endfor %}
+            {% if current_user.is_authenticated %}
             <div class="row">
                 <form action="." method="POST">
                     <textarea name="contents" class="form-control" placeholder="Enter a comment"></textarea>
                     <input type="submit" class="btn btn-success" value="Post comment">
                 </form>
             </div>
+            {% endif %}
         </div>
     </body>
 </html>
