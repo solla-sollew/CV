@@ -26,6 +26,14 @@ class Comment(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     content = db.Column(db.String(4096))
 
+@app.route("/login/")
+def login():
+    return render_template("login_page.html")
+
+@app.route("/resume")
+def indexresume():
+    return render_template("indexUC.html")
+
 @app.route("/cv")
 def indexcv():
     return render_template("index.html")
