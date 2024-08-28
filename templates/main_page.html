@@ -32,7 +32,10 @@
         <div class="container">
             {% for comment in comments %}
                 <div class="row">
-                {{ comment.content }}
+                    {{ comment.content }}
+                </div>
+                <div>
+                    <small>Posted {{ timestamp.strftime("%A, %d %B %Y at %I:%M %p") }} by anonymous</small>
                 </div>
             {% endfor %}
             {% if current_user.is_authenticated %}
