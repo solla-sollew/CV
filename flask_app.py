@@ -18,7 +18,7 @@ SQLALCHEMY_DATABASE_URI = "mysql+mysqlconnector://{username}:{password}@{hostnam
     databasename="1solla2sollew$comments",
 )
 app.config["SQLALCHEMY_DATABASE_URI"] = SQLALCHEMY_DATABASE_URI
-app.config["SQLALCHEMY_POOL_RECYCLE"] = 60
+app.config["SQLALCHEMY_POOL_RECYCLE"] = 180
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
 db = SQLAlchemy(app)
@@ -58,6 +58,7 @@ class Comment(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     content = db.Column(db.String(4096))
+    posted = db.Column(db.DateTime, default=datetime.now)
 
 @app.route("/login/", methods=["GET", "POST"])
 def login():
@@ -85,11 +86,12 @@ def indexcv():
 
 @app.route("/", methods=["GET", "POST"])
 def index():
-    if not current_user.is_authenticated:
-        return redirect(url_for('index'))
 
     if request.method == "GET":
-        return render_template("main_page.html", comments=Comment.query.all(), timestamp=datetime.now())
+        return render_template("main_page.html", comments=Comment.query.all())
+
+    if not current_user.is_authenticated:
+        return redirect(url_for('index'))
 
     comment = Comment(content=request.form["contents"])
     db.session.add(comment)
