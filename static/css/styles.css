@@ -11007,3 +11007,17 @@ section.resume-section .resume-section-content {
     width: auto;
     vertical-align: middle;
 }
+
+.brand-icons {
+  color: #6C757D;
+}
+
+.brand-icons .fa-brands,
+.brand-icons .brand-icon {
+  font-size: 32px;        
+  height: 32px;        
+  width: auto;
+  vertical-align: middle;
+  line-height: 1;
+}
+
